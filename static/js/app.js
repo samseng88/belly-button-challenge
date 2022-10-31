@@ -38,7 +38,6 @@ text: bar_labels
 ];
 
 var barLayout = {
-title: "TOP 10 Sample Values",
 xaxis: { title: "Sample Values" },
 yaxis: { title: "OTU ID" }
 };
