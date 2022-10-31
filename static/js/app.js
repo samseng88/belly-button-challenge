@@ -85,9 +85,9 @@ d3.select("#selDataset").on("change", optionChanged);
 
 function optionChanged() {
   console.log("Different item was selected.");
-  var dropdownMenu = d3.select("#selDataset");
-  var dropdownValue = dropdownMenu.property("value");
-  console.log(`Currently test id ${dropdownValue} is shown on the page`);
+  var dropDownMenu = d3.select("#selDataset");
+  var dropDownValue = dropDownMenu.property("value");
+  console.log(`Currently test id ${dropDownValue} is shown on the page`);
 
   // Update graph
   createPlotly(data);
