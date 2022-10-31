@@ -1,36 +1,23 @@
 // Use the D3 library to read in samples.json.
 d3.json("samples.json").then(function createPlotly(data) {
-    console.log(data);
-    var testid = data.names;
-    console.log(testid);
+  console.log(data);
+  var testid = data.names;
+  console.log(testid);
 
-    // Create a dynamic dropdown menu
-    d3.select("#selDataset")
-      .selectAll("option")
-      .data(testid)
-      .enter()
-      .append("option")
-      .html(function(d) {
-        return `<option>${d}</option`;
-      });
+  // Create a dropdown menu
+  d3.select("#selDataset")
+    .selectAll("option")
+    .data(testid)
+    .enter()
+    .append("option")
+    .html(function(d) {
+      return `<option>${d}</option`;
+    });
 
-    // Retrive the selected option and get index
-    var dropDownMenu = d3.select("#selDataset");
-    var dropDownValue = dropDownMenu.property("value");
-    var index = testid.indexOf(dropDownValue);
-
-// Create demographic info
-d3.select("#sample-metadata").html("");
-d3.select("#sample-metadata")
-  .selectAll("p")
-  .data(Object.entries(data.metadata[index]))
-  .enter()
-  .append("p")
-  .html(function(d) {
-    return `${d[0]} : ${d[1]}`;
-  });
-
-console.log(Object.entries(data.metadata[index]));
+  // Retrive the selected option and get index
+  var dropDownMenu = d3.select("#selDataset");
+  var dropDownValue = dropDownMenu.property("value");
+  var index = testid.indexOf(dropDownValue);
 
 // Create a bar graph using index
 var bellyData = data.samples[index].sample_values
@@ -42,11 +29,11 @@ var yaxis = DataSamples.map(a => "OTU" + a);
 
 var bardata = [
 {
-  x: bellyData,
-  y: yaxis,
-  type: "bar",
-  orientation: "h",
-  text: bar_labels
+x: bellyData,
+y: yaxis,
+type: "bar",
+orientation: "h",
+text: bar_labels
 }
 ];
 
@@ -60,37 +47,50 @@ Plotly.newPlot("bar", bardata, barLayout);
 
 // Create bubble chart
 var bubbleData = [
-  {
-    x: data.samples[index].otu_ids,
-    y: data.samples[index].sample_values,
-    mode: "markers",
-    text: data.samples[index].otu_labels,
-    marker: {
-      size: data.samples[index].sample_values,
-      color: data.samples[index].otu_ids,
-      colorscale: "Rainbow"
-    }
+{
+  x: data.samples[index].otu_ids,
+  y: data.samples[index].sample_values,
+  mode: "markers",
+  text: data.samples[index].otu_labels,
+  marker: {
+    size: data.samples[index].sample_values,
+    color: data.samples[index].otu_ids,
+    colorscale: "Rainbow"
   }
+}
 ];
 
 var bubbleLabels = {
-  xaxis: { title: "OTU ID" },
-  yaxis: { title: "Sample Values" }
+xaxis: { title: "OTU ID" },
+yaxis: { title: "Sample Values" }
 };
 
 Plotly.newPlot("bubble", bubbleData, bubbleLabels);
+
+// Create demographic info
+d3.select("#sample-metadata").html("");
+d3.select("#sample-metadata")
+.selectAll("p")
+.data(Object.entries(data.metadata[index]))
+.enter()
+.append("p")
+.html(function(d) {
+  return `${d[0]} : ${d[1]}`;
+});
+
+console.log(Object.entries(data.metadata[index]));
 
 // Select different Data
 d3.select("#selDataset").on("change", optionChanged);
 
 function optionChanged() {
-  console.log("Different item was selected.");
-  var dropDownMenu = d3.select("#selDataset");
-  var dropDownValue = dropDownMenu.property("value");
-  console.log(`Currently test id ${dropDownValue} is shown on the page`);
+console.log("Different item was selected.");
+var dropDownMenu = d3.select("#selDataset");
+var dropDownValue = dropDownMenu.property("value");
+console.log(`Currently test id ${dropDownValue} is shown on the page`);
 
-  // Update graph
-  createPlotly(data);
+// Update graph
+createPlotly(data);
 }
-  }
+}
 );
