@@ -33,20 +33,20 @@ d3.select("#sample-metadata")
 console.log(Object.entries(data.metadata[index]));
 
 // Create a bar graph using index
-var defaultsampleData = data.samples[index].sample_values
+var bellyData = data.samples[index].sample_values
 .slice(0, 10)
 .reverse();
-var defaultotuData = data.samples[index].otu_ids.slice(0, 10).reverse();
-var defaultotuLabels = data.samples[index].otu_labels.slice(0, 10).reverse();
-var defaultyxis = defaultotuData.map(a => "OTU" + a);
+var DataSamples = data.samples[index].otu_ids.slice(0, 10).reverse();
+var bar_labels = data.samples[index].otu_labels.slice(0, 10).reverse();
+var yaxis = DataSamples.map(a => "OTU" + a);
 
 var bardata = [
 {
-  x: defaultsampleData,
-  y: defaultyxis,
+  x: bellyData,
+  y: yaxis,
   type: "bar",
   orientation: "h",
-  text: defaultotuLabels
+  text: bar_labels
 }
 ];
 
