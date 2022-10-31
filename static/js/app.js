@@ -51,14 +51,14 @@ var bardata = [
 ];
 
 var barLayout = {
-title: "TOP10 Sample Values",
+title: "TOP 10 Sample Values",
 xaxis: { title: "Sample Values" },
 yaxis: { title: "OTU ID" }
 };
 
 Plotly.newPlot("bar", bardata, barLayout);
 
-// Create a bubble chart
+// Create bubble chart
 var bubbleData = [
   {
     x: data.samples[index].otu_ids,
