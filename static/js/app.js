@@ -15,9 +15,9 @@ d3.json("samples.json").then(function createPlotly(data) {
       });
 
     // Retrive the selected option and get index
-    var dropdownMenu = d3.select("#selDataset");
-    var dropdownValue = dropdownMenu.property("value");
-    var index = testid.indexOf(dropdownValue);
+    var dropDownMenu = d3.select("#selDataset");
+    var dropDownValue = dropDownMenu.property("value");
+    var index = testid.indexOf(dropDownValue);
 
 // Create demographic info
 d3.select("#sample-metadata").html("");
@@ -80,7 +80,7 @@ var bubbleLabels = {
 
 Plotly.newPlot("bubble", bubbleData, bubbleLabels);
 
-// When different test ID is selected, call an function optionChanged
+// Select different Data
 d3.select("#selDataset").on("change", optionChanged);
 
 function optionChanged() {
