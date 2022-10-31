@@ -58,27 +58,7 @@ yaxis: { title: "OTU ID" }
 
 Plotly.newPlot("bar", bardata, barLayout);
 
-// Create a bubble chart
-var bubbleData = [
-  {
-    x: data.samples[index].otu_ids,
-    y: data.samples[index].sample_values,
-    mode: "markers",
-    text: data.samples[index].otu_labels,
-    marker: {
-      size: data.samples[index].sample_values,
-      color: data.samples[index].otu_ids,
-      colorscale: "Rainbow"
-    }
-  }
-];
 
-var bubbleLabels = {
-  xaxis: { title: "OTU ID" },
-  yaxis: { title: "Sample Values" }
-};
-
-Plotly.newPlot("bubble", bubbleData, bubbleLabels);
 
 // Select different Data
 d3.select("#selDataset").on("change", optionChanged);
